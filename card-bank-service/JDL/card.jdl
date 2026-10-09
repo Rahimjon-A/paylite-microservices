@@ -1,0 +1,21 @@
+enum CardType {
+  UZCARD,
+  HUMO
+}
+
+enum CardStatus {
+  ACTIVE,
+  BLOCKED,
+  EXPIRED
+}
+
+entity Card {
+  pan String required unique minlength(16) maxlength(16),
+  type CardType required,
+  expireDate LocalDate required,
+  fullName String required,
+  pinfl String required minlength(14) maxlength(14),
+  phoneNumber String required,
+  status CardStatus required,
+  createdAt Instant required
+}

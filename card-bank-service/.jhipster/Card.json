@@ -1,0 +1,57 @@
+{
+  "annotations": {
+    "changelogDate": "20261005114850"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "pan",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "16",
+      "fieldValidateRulesMinlength": "16"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "CardType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "UZCARD,HUMO"
+    },
+    {
+      "fieldName": "expireDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "fullName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "pinfl",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "14",
+      "fieldValidateRulesMinlength": "14"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "CardStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,BLOCKED,EXPIRED"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Card",
+  "relationships": [],
+  "searchEngine": "no"
+}

@@ -1,0 +1,40 @@
+{
+  "annotations": {
+    "changelogDate": "20261006075906"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "pan",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "16",
+      "fieldValidateRulesMinlength": "16"
+    },
+    {
+      "fieldName": "balance",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "CardAccountStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,BLOCKED,CLOSED"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "updatedAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "CardAccount",
+  "relationships": [],
+  "searchEngine": "no"
+}

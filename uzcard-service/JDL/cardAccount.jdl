@@ -1,0 +1,13 @@
+enum CardAccountStatus {
+  ACTIVE,
+  BLOCKED,
+  CLOSED
+}
+
+entity CardAccount {
+  pan String required unique minlength(16) maxlength(16),
+  balance Long required min(0),
+  status CardAccountStatus required,
+  createdAt Instant required,
+  updatedAt Instant required
+}

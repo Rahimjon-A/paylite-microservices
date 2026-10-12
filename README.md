@@ -159,6 +159,24 @@ Open the frontend at:
 
 Make sure the Keycloak realm, frontend client, API URLs, and backend configurations match your local environment before testing.
 
+**Note:** `consul KV` add this below before any testing of API Endpoints, after consul started!
+
+Key: `config/paylite-service/data`
+
+Value:
+
+```yaml
+paylite:
+  commission:
+    uzcard-to-uzcard: 0
+    uzcard-to-humo: 1
+    humo-to-uzcard: 1
+    humo-to-humo: 2
+application:
+  payment:
+    commission-percent: 1.5
+```
+
 ## API Endpoints
 
 All endpoints below use the local backend URLs shown in the architecture table.
@@ -181,7 +199,7 @@ Example P2P request:
 }
 ```
 
-**Note:** `amount` is expressed in tiyin. The PAN values above are illustrative; use valid cards created in your environment.
+**Note:** `amount` is expressed in tiyin. The PAN values above are illustrative; use valid cards created in your environment. `unique-request-id` should be unique for each request, and provied by the client. (not only uuid but any unique value)
 
 ### Card Bank Service — Port 8081
 

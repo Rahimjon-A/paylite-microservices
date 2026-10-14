@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
@@ -38,6 +39,7 @@ public class CardResource {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasAuthority('ROLE_AGENT')")
     public ResponseEntity<CardResponse> createCard(@Valid @RequestBody CardCreateRequest request) throws URISyntaxException {
         LOG.debug("REST request to create Card : {}", request);
 
@@ -49,6 +51,7 @@ public class CardResource {
     }
 
     @GetMapping("/{pan}")
+    @PreAuthorize("hasAuthority('ROLE_AGENT')")
     public ResponseEntity<CardResponse> getByPan(@PathVariable("pan") String pan) {
         LOG.debug("REST request to get Card with pan : {}", pan);
 
@@ -59,18 +62,21 @@ public class CardResource {
 
 
     @PostMapping("/{pan}/deposit")
+    @PreAuthorize("hasAuthority('ROLE_AGENT')")
     public ResponseEntity<CardAccountResponse> deposit(@PathVariable String pan,
                                                        @Valid @RequestBody BalanceRequest request) {
         return ResponseEntity.ok(cardService.deposit(pan, request.amount()));
     }
 
     @PostMapping("/{pan}/withdraw")
+    @PreAuthorize("hasAuthority('ROLE_AGENT')")
     public ResponseEntity<CardAccountResponse> withdraw(@PathVariable String pan,
                                                         @Valid @RequestBody BalanceRequest request) {
         return ResponseEntity.ok(cardService.withdraw(pan, request.amount()));
     }
 
     @GetMapping("/{pan}/balance")
+    @PreAuthorize("hasAuthority('ROLE_AGENT')")
     public ResponseEntity<CardAccountResponse> getBalance(@PathVariable String pan) {
         return ResponseEntity.ok(cardService.getBalance(pan));
     }

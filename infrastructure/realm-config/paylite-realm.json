@@ -769,7 +769,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "web_app",
+      "secret": "${PAYLITE_CLIENT_SECRET}",
       "redirectUris": [
         "dev.localhost.ionic:*",
         "http://127.0.0.1:*",
@@ -820,7 +820,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "card_bank_app",
+      "secret": "${CARD_BANK_CLIENT_SECRET}",
       "redirectUris": [
         "dev.localhost.ionic:*",
         "http://127.0.0.1:*",
@@ -871,7 +871,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "uzcard_app",
+      "secret": "${UZCARD_CLIENT_SECRET}",
       "redirectUris": [
         "dev.localhost.ionic:*",
         "http://127.0.0.1:*",
@@ -922,7 +922,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "humo_app",
+      "secret": "${HUMO_CLIENT_SECRET}",
       "redirectUris": [
         "dev.localhost.ionic:*",
         "http://127.0.0.1:*",
@@ -973,7 +973,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "paylite_frontend",
+      "secret": "${PAYLITE_FRONTEND_SECRET}",
       "redirectUris": [
         "dev.localhost.ionic:*",
         "http://127.0.0.1:*",

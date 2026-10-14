@@ -33,8 +33,8 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5433/uzcard
-    username: uzcard
-    password: uzcard
+    username: ${UZCARD_DB_USERNAME}
+    password: ${UZCARD_DB_PASSWORD}
     hikari:
       poolName: Hikari
       auto-commit: false

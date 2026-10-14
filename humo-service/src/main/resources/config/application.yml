@@ -94,6 +94,12 @@ spring:
   application:
     name: humo-service
 
+  # Because of every service has it own config and secret,
+  # one root .env file used for all services so please create .env in same path like .env.exampe, content can be the same!
+  config:
+    import:
+      - "optional:file:../.env[.properties]"
+
   cloud:
     consul:
       host: localhost
@@ -169,7 +175,7 @@ spring:
         registration:
           oidc:
             client-id: humo_app
-            client-secret: humo_app
+            client-secret: ${HUMO_CLIENT_SECRET}
             scope: openid, profile, email, offline_access # last one for refresh tokens
   task:
     execution:

@@ -32,7 +32,11 @@ public class CardAccountService {
 
         Instant now = Instant.now();
 
-        CardAccount account = new CardAccount().pan(request.pan()).balance(0L).status(CardAccountStatus.ACTIVE).createdAt(now).updatedAt(now);
+        CardAccount account = new CardAccount()
+            .pan(request.pan())
+            .balance(0L)
+            .status(CardAccountStatus.ACTIVE)
+            .createdAt(now).updatedAt(now);
 
         CardAccount saved = cardAccountRepository.save(account);
 
@@ -42,7 +46,9 @@ public class CardAccountService {
     @Transactional(readOnly = true)
     public CardAccountResponse getByPan(String pan) {
 
-        CardAccount account = cardAccountRepository.findByPan(pan).orElseThrow(() -> new CardAccountNotFoundException(pan));
+        CardAccount account = cardAccountRepository
+            .findByPan(pan)
+            .orElseThrow(() -> new CardAccountNotFoundException(pan));
 
         return toResponse(account);
     }

@@ -54,7 +54,8 @@ public class CardAsserts {
             .satisfies(a -> assertThat(a.getPinfl()).as("check pinfl").isEqualTo(expected.getPinfl()))
             .satisfies(a -> assertThat(a.getPhoneNumber()).as("check phoneNumber").isEqualTo(expected.getPhoneNumber()))
             .satisfies(a -> assertThat(a.getStatus()).as("check status").isEqualTo(expected.getStatus()))
-            .satisfies(a -> assertThat(a.getCreatedAt()).as("check createdAt").isEqualTo(expected.getCreatedAt()));
+            .satisfies(a -> assertThat(a.getCreatedAt()).as("check createdAt").isEqualTo(expected.getCreatedAt()))
+            .satisfies(a -> assertThat(a.getCreatedByLogin()).as("check createdByLogin").isEqualTo(expected.getCreatedByLogin()));
     }
 
     /**

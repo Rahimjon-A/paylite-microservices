@@ -6,11 +6,11 @@ services:
     container_name: paylite-postgres
 
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
 
     ports:
-      - '5433:5432'
+      - '127.0.0.1:5433:5432'
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -29,8 +29,8 @@ services:
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     ports:
-      - '8500:8500'
-      - '8600:8600/udp'
+      - '127.0.0.1:8500:8500'
+      - '127.0.0.1:8600:8600/udp'
 
   keycloak:
     image: quay.io/keycloak/keycloak:26.2.3
@@ -56,9 +56,14 @@ services:
       CARD_BANK_CLIENT_SECRET: ${CARD_BANK_CLIENT_SECRET:?Set CARD_BANK_CLIENT_SECRET}
       UZCARD_CLIENT_SECRET: ${UZCARD_CLIENT_SECRET:?Set UZCARD_CLIENT_SECRET}
       HUMO_CLIENT_SECRET: ${HUMO_CLIENT_SECRET:?Set HUMO_CLIENT_SECRET}
+      AGENT_LOGIN: ${AGENT_LOGIN:?Set AGENT_LOGIN}
+      AGENT2_LOGIN: ${AGENT2_LOGIN:?Set AGENT2_LOGIN}
+      AGENT_PASSWORD: ${AGENT_PASSWORD:?Set AGENT_PASSWORD}
+      AGENT2_PASSWORD: ${AGENT2_PASSWORD:?Set AGENT2_PASSWORD}
+
     ports:
-      - '9080:9080'
-      - '9443:9443'
+      - '127.0.0.1:9080:9080'
+      - '127.0.0.1:9443:9443'
     healthcheck:
       test: ['CMD-SHELL', 'bash /opt/keycloak/health-check.sh']
       interval: 5s

@@ -13,5 +13,6 @@ public record CardResponse(
     String fullName,
     String phoneNumber,
     CardStatus status,
-    Instant createdAt
+    Instant createdAt,
+    String createdByLogin
 ) {}

@@ -18,4 +18,5 @@ entity Card {
   phoneNumber String required,
   status CardStatus required,
   createdAt Instant required
+  createdByLogin String required
 }

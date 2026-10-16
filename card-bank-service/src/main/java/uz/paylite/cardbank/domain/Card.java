@@ -60,6 +60,10 @@ public class Card implements Serializable {
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 
+    @NotNull
+    @Column(name = "created_by_login", nullable = false)
+    private String createdByLogin;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -179,6 +183,19 @@ public class Card implements Serializable {
         this.createdAt = createdAt;
     }
 
+    public String getCreatedByLogin() {
+        return this.createdByLogin;
+    }
+
+    public Card createdByLogin(String createdByLogin) {
+        this.setCreatedByLogin(createdByLogin);
+        return this;
+    }
+
+    public void setCreatedByLogin(String createdByLogin) {
+        this.createdByLogin = createdByLogin;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -211,6 +228,7 @@ public class Card implements Serializable {
             ", phoneNumber='" + getPhoneNumber() + "'" +
             ", status='" + getStatus() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
+            ", createdByLogin='" + getCreatedByLogin() + "'" +
             "}";
     }
 }

@@ -63,6 +63,9 @@ class CardResourceIT {
     private static final Instant DEFAULT_CREATED_AT = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CREATED_AT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final String DEFAULT_CREATED_BY_LOGIN = "AAAAAAAAAA";
+    private static final String UPDATED_CREATED_BY_LOGIN = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/cards";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -100,7 +103,8 @@ class CardResourceIT {
             .pinfl(DEFAULT_PINFL)
             .phoneNumber(DEFAULT_PHONE_NUMBER)
             .status(DEFAULT_STATUS)
-            .createdAt(DEFAULT_CREATED_AT);
+            .createdAt(DEFAULT_CREATED_AT)
+            .createdByLogin(DEFAULT_CREATED_BY_LOGIN);
     }
 
     /**
@@ -118,7 +122,8 @@ class CardResourceIT {
             .pinfl(UPDATED_PINFL)
             .phoneNumber(UPDATED_PHONE_NUMBER)
             .status(UPDATED_STATUS)
-            .createdAt(UPDATED_CREATED_AT);
+            .createdAt(UPDATED_CREATED_AT)
+            .createdByLogin(UPDATED_CREATED_BY_LOGIN);
     }
 
     @BeforeEach
@@ -303,6 +308,22 @@ class CardResourceIT {
 
     @Test
     @Transactional
+    void checkCreatedByLoginIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        card.setCreatedByLogin(null);
+
+        // Create the Card, which fails.
+
+        restCardMockMvc
+            .perform(post(ENTITY_API_URL).with(csrf()).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(card)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllCards() throws Exception {
         // Initialize the database
         insertedCard = cardRepository.saveAndFlush(card);
@@ -320,7 +341,8 @@ class CardResourceIT {
             .andExpect(jsonPath("$.[*].pinfl").value(hasItem(DEFAULT_PINFL)))
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].createdAt").value(hasItem(DEFAULT_CREATED_AT.toString())));
+            .andExpect(jsonPath("$.[*].createdAt").value(hasItem(DEFAULT_CREATED_AT.toString())))
+            .andExpect(jsonPath("$.[*].createdByLogin").value(hasItem(DEFAULT_CREATED_BY_LOGIN)));
     }
 
     @Test
@@ -342,7 +364,8 @@ class CardResourceIT {
             .andExpect(jsonPath("$.pinfl").value(DEFAULT_PINFL))
             .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
-            .andExpect(jsonPath("$.createdAt").value(DEFAULT_CREATED_AT.toString()));
+            .andExpect(jsonPath("$.createdAt").value(DEFAULT_CREATED_AT.toString()))
+            .andExpect(jsonPath("$.createdByLogin").value(DEFAULT_CREATED_BY_LOGIN));
     }
 
     @Test
@@ -372,7 +395,8 @@ class CardResourceIT {
             .pinfl(UPDATED_PINFL)
             .phoneNumber(UPDATED_PHONE_NUMBER)
             .status(UPDATED_STATUS)
-            .createdAt(UPDATED_CREATED_AT);
+            .createdAt(UPDATED_CREATED_AT)
+            .createdByLogin(UPDATED_CREATED_BY_LOGIN);
 
         restCardMockMvc
             .perform(
@@ -455,12 +479,7 @@ class CardResourceIT {
         Card partialUpdatedCard = new Card();
         partialUpdatedCard.setId(card.getId());
 
-        partialUpdatedCard
-            .pan(UPDATED_PAN)
-            .type(UPDATED_TYPE)
-            .expireDate(UPDATED_EXPIRE_DATE)
-            .pinfl(UPDATED_PINFL)
-            .createdAt(UPDATED_CREATED_AT);
+        partialUpdatedCard.pinfl(UPDATED_PINFL).status(UPDATED_STATUS);
 
         restCardMockMvc
             .perform(
@@ -497,7 +516,8 @@ class CardResourceIT {
             .pinfl(UPDATED_PINFL)
             .phoneNumber(UPDATED_PHONE_NUMBER)
             .status(UPDATED_STATUS)
-            .createdAt(UPDATED_CREATED_AT);
+            .createdAt(UPDATED_CREATED_AT)
+            .createdByLogin(UPDATED_CREATED_BY_LOGIN);
 
         restCardMockMvc
             .perform(

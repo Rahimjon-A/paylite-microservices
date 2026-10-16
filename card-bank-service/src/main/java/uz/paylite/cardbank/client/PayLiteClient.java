@@ -1,6 +1,8 @@
 package uz.paylite.cardbank.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import uz.paylite.cardbank.config.FeignSecurityConfig;
@@ -14,4 +16,7 @@ public interface PayLiteClient {
 
     @PostMapping("/api/agent-cards/bind")
     void bindCard(@RequestBody BindCardRequest request);
+
+    @DeleteMapping("/api/agent-cards/bind/{pan}")
+    void unbindCard(@PathVariable("pan") String pan);
 }

@@ -25,6 +25,8 @@ import uz.paylite.cardbank.repository.CardRepository;
 import uz.paylite.cardbank.service.CardService;
 import uz.paylite.cardbank.web.rest.errors.BadRequestAlertException;
 
+import static uz.paylite.cardbank.util.CardUtil.maskPan;
+
 /**
  * REST controller for managing {@link uz.paylite.cardbank.domain.Card}.
  */
@@ -53,7 +55,7 @@ public class CardResource {
     @GetMapping("/{pan}")
     @PreAuthorize("hasAuthority('ROLE_AGENT')")
     public ResponseEntity<CardResponse> getByPan(@PathVariable("pan") String pan) {
-        LOG.debug("REST request to get Card with pan : {}", pan);
+        LOG.debug("REST request to get Card with pan : {}", maskPan(pan));
 
         CardResponse response = cardService.findByPan(pan);
 
@@ -65,6 +67,7 @@ public class CardResource {
     @PreAuthorize("hasAuthority('ROLE_AGENT')")
     public ResponseEntity<CardAccountResponse> deposit(@PathVariable String pan,
                                                        @Valid @RequestBody BalanceRequest request) {
+        LOG.debug("REST request to deposit {} into Card with pan : {}", request.amount(), maskPan(pan));
         return ResponseEntity.ok(cardService.deposit(pan, request.amount()));
     }
 
@@ -72,12 +75,14 @@ public class CardResource {
     @PreAuthorize("hasAuthority('ROLE_AGENT')")
     public ResponseEntity<CardAccountResponse> withdraw(@PathVariable String pan,
                                                         @Valid @RequestBody BalanceRequest request) {
+        LOG.debug("REST request to withdraw {} from Card with pan : {}", request.amount(), maskPan(pan));
         return ResponseEntity.ok(cardService.withdraw(pan, request.amount()));
     }
 
     @GetMapping("/{pan}/balance")
     @PreAuthorize("hasAuthority('ROLE_AGENT')")
     public ResponseEntity<CardAccountResponse> getBalance(@PathVariable String pan) {
+        LOG.debug("REST request to get balance for Card with pan : {}", maskPan(pan));
         return ResponseEntity.ok(cardService.getBalance(pan));
     }
 

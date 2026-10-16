@@ -2441,7 +2441,7 @@
         {
           "id": "b860462b-9b02-48ba-9523-d3a8926a917b",
           "type": "password",
-          "value": "admin",
+          "value": "${KEYCLOAK_ADMIN_PASSWORD}",
           "temporary": false,
           "createdDate": 1505479429154,
           "secretData": "{\"value\":\"4pf9K2jWSCcHC+CwsZP/qidN5pSmDUe6AX6wBerSGdBVKkExay8MWKx+EKmaaObZW6FVsD8vdW/ZsyUFD9gJ1Q==\",\"salt\":\"1/qNkZ5kr77jOMOBPBogGw==\"}",
@@ -2460,7 +2460,7 @@
     {
       "id": "c4af4e2f-b432-4c3b-8405-cca86cd5b97b",
       "createdTimestamp": 1505479373742,
-      "username": "agent",
+      "username": "${AGENT_LOGIN}",
       "enabled": true,
       "totp": false,
       "emailVerified": true,
@@ -2471,7 +2471,7 @@
         {
           "id": "7821832b-1e82-45a2-b8d3-f1a6ad909e64",
           "type": "password",
-          "value": "agent",
+          "value": "${AGENT_PASSWORD}",
           "temporary": false,
           "createdDate": 1505479392766,
           "secretData": "{\"value\":\"MbKsMgWPnZyImih8s4SaoCSCq+XIY/c6S9F93sXEidHF1TjPWxCqMkec0+o3860CMLXHt3az61cIJOWI0FW9aw==\",\"salt\":\"fmpBI1r8R1u75hDLMUlwBw==\"}",
@@ -2488,7 +2488,7 @@
       "groups": ["/Agents"]
     },
     {
-      "username": "agent2",
+      "username": "${AGENT2_LOGIN}",
       "enabled": true,
       "emailVerified": true,
       "firstName": "Agent",
@@ -2497,7 +2497,7 @@
       "credentials": [
         {
           "type": "password",
-          "value": "agent2",
+          "value": "${AGENT2_PASSWORD}",
           "temporary": false
         }
       ],

@@ -82,17 +82,22 @@ If a recipient-side payment fails after the sender has been charged, PayLite's c
 
 ### 1. Start Infrastructure
 
-Open a terminal in the `infrastructure` directory:
+### Configure Environment Variables
+
+Before starting the services, ensure the root `.env` file in the `microservices` directory contains the required credentials and client secrets.
+there is `.env.example` file in root directory containing dummies, just copy and paste into `.env`! You can use them during development but in prod change them with strong hashed values!
+
+Open a terminal in the `microservices` directory:
 
 ```powershell
-cd infrastructure
-docker compose up -d
+cd microservices
+docker compose --env-file .env -f infrastructure/docker-compose.yml up -d
 ```
 
 Check the running containers:
 
 ```powershell
-docker compose ps
+docker compose --env-file .env -f infrastructure/docker-compose.yml ps
 ```
 
 The Compose configuration is responsible for starting the shared infrastructure, including PostgreSQL, Keycloak, and Consul.
@@ -100,13 +105,13 @@ The Compose configuration is responsible for starting the shared infrastructure,
 The database initialization script is located at:
 
 ```text
-infrastructure/postgres/init-multiple-databases.sh
+microservices/infrastructure/postgres/init-multiple-databases.sh
 ```
 
 The Keycloak realm configuration is located at:
 
 ```text
-infrastructure/realm-config/paylite-realm.json
+micorservices/infrastructure/realm-config/paylite-realm.json
 ```
 
 ### 2. Start the Backend Services

@@ -8,5 +8,6 @@ public record BindCardRequest(
     String type,
     LocalDate expireDate,
     String status,
-    Instant createdAt
+    Instant createdAt,
+    String createdByLogin
 ) {}
